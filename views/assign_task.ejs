@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+    <div class="task">
+        <div class="form">
+            <span>Assign Tasks</span>
+            <select name="user" onchange="onUserChange(this)">
+                <option value="">Select User</option>
+                <%alluser.forEach((user)=>{%>
+                <option value='<%=user.name%>'><%=user.name%></option>
+                <%})%>
+            </select>
+
+            <form method="post">
+                <input type="text" name="task_name" placeholder="Task Name"><br>
+                <h3>Task Type</h3>
+                <input type="radio" name="task_type" value="pending" id="pending">
+                <label for="pending">Pending</label>
+                <input type="radio" name="task_type" value="done" id="done">
+                <label for="done">Done</label>
+                <br><br>
+                <button value="submit" onclick="submitfunc()">submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        var form = document.querySelector('form')
+        var selected
+        var onUserChange = function (e) {
+            selected = e.value
+        }
+
+        function submitfunc(e) {
+            var action = `/assign_task/${selected}`
+            form.action = action
+            form.submit()
+        }
+    </script>
+
+</body>
+</html>
